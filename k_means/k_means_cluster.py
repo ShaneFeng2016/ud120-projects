@@ -9,6 +9,7 @@
 
 import pickle
 import numpy
+from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import sys
 sys.path.append("../tools/")
@@ -62,11 +63,10 @@ for f1, f2 in finance_features:
     plt.scatter( f1, f2 )
 plt.show()
 
-### cluster here; create predictions of the cluster labels
+### make 2 clusters here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
-
-
-
+kmeans = KMeans(n_clusters=2).fit(data)
+pred = kmeans.labels_
 
 ### rename the "name" parameter when you change the number of features
 ### so that the figure gets saved to a different file
