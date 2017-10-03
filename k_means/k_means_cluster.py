@@ -44,6 +44,18 @@ data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r")
 ### there's an outlier--remove it! 
 data_dict.pop("TOTAL", 0)
 
+### Find the maximum and the minimum values of exercised_stock_options
+maxStockOption = 0
+minStockOption = sys.maxint
+for people in data_dict:
+    stockOption = data_dict[people]['exercised_stock_options']
+    if (stockOption != 'NaN'):
+        if (stockOption > maxStockOption):
+	    maxStockOption = stockOption
+        if (stockOption < minStockOption):
+	    minStockOption = stockOption
+print "The maximum value of exercised_stock_options is: " + str(maxStockOption)
+print "The maximum value of exercised_stock_options is: " + str(minStockOption)
 
 ### the input features we want to use 
 ### can be any key in the person-level dictionary (salary, director_fees, etc.) 
@@ -54,7 +66,6 @@ poi  = "poi"
 features_list = [poi, feature_1, feature_2, feature_3]
 data = featureFormat(data_dict, features_list )
 poi, finance_features = targetFeatureSplit( data )
-
 
 ### in the "clustering with 3 features" part of the mini-project,
 ### you'll want to change this line to 
